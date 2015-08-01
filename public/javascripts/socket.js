@@ -87,7 +87,7 @@ $(document).ready(function() {
 	})
 
 	$(".lineWidth").on('click', function(){
-		width = $(this).text()
+		width = $(this).attr('id')
 		lineWidth = parseInt(width)
 	})
 
