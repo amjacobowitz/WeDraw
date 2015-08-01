@@ -6,7 +6,19 @@ html
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js")
 		script(src="/javascripts/socket.js")
 	body
-		p And now, we draw!
-		div(class="time")
+		h3 And now, we draw!
+		//- div(class="time")
+		span(class="color-picker")
+			button(class="lineColor" style="border:1px solid black;") red
+			button(class="lineColor" style="border:1px solid black;") green
+			button(class="lineColor" style="border:1px solid black;") blue
+			button(class="lineColor" style="border:1px solid black;") purple
+			button(class="lineColor" style="border:1px solid black;") black
+		span(width="10px") -
+		span(class="width-picker")
+			button(class="lineWidth" style="border:1px solid black;") 5
+			button(class="lineWidth" style="border:1px solid black;") 3
+			button(class="lineWidth" style="border:1px solid black;") 1
+		br
 		canvas(id="drawingCanvas" width="200" height="100" style="border:1px solid black;")
 		

@@ -13,7 +13,7 @@ $(document).ready(function() {
 
 	//I am offsetting here so that my x and y coordinated are what I would expect.  They should be 0 for x in the top right and 0 for y there.  However, y is currently starting at 20.  Not sure why.  I have just put a +20 for now to take care of the discrepency
 	var offsetX = canvasOffset.left
-	var offsetY = canvasOffset.top + 20
+	var offsetY = canvasOffset.top
 	// this variable determines whether we will track where the mouse is moving or not.  When true, tracks. When false, does not.
 	var drawingOn = false
 	var lineColor = 'black'
@@ -27,6 +27,7 @@ $(document).ready(function() {
 		curMouseY = parseInt(event.clientY - offsetY);
 		console.log('mousedown x: '+ curMouseX);
 		console.log('mousedown y: '+ curMouseY);
+
 
 		drawingOn = true;
 
@@ -68,6 +69,7 @@ $(document).ready(function() {
 		context.closePath()
 	}
 
+
 	$('#drawingCanvas').on('mousedown', function(event){
 		trackMouseDown(event);
 	})
@@ -79,6 +81,16 @@ $(document).ready(function() {
 	$('#drawingCanvas').on('mousemove', function(event){
 		trackMouseMove(event);
 	})
+
+	$(".lineColor").on('click', function(){
+		lineColor = $(this).text()
+	})
+
+	$(".lineWidth").on('click', function(){
+		width = $(this).text()
+		lineWidth = parseInt(width)
+	})
+
 
 
 
