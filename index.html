@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+    </script>
+  </head>
+  <body>
+    <h1>Hello!</h1>
+    <form action="/users" method="post">
+      <input type="text" name="input" placeholder="input here">
+      <input type='submit' value="submit">
+    </form>
+  </body>
+</html>
