@@ -17,7 +17,7 @@ $(document).ready(function() {
 	// this variable determines whether we will track where the mouse is moving or not.  When true, tracks. When false, does not.
 	var drawingOn = false
 	var lineColor = 'black'
-	var lineWidth = 5
+	var lineWidth = 3
 
 
 	function trackMouseDown(event){
@@ -83,7 +83,13 @@ $(document).ready(function() {
 	})
 
 	$(".lineColor").on('click', function(){
-		lineColor = $(this).text()
+		lineColor = $(this).text();
+		lineWidth = 3;
+	})
+
+	$(".eraser").on('click', function(){
+		lineColor = $(this).attr('id');
+		lineWidth = 7;
 	})
 
 	$(".lineWidth").on('click', function(){
