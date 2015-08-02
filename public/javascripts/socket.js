@@ -115,7 +115,7 @@ $(document).ready(function() {
 
 	canvasInit();
 
-	var socket = io.connect('https://floating-earth-1389.herokuapp.com/')
+	var socket = io.connect('http://localhost:3000/')
 
 
 	socket.on('draw', function(data){

@@ -19,20 +19,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 
+
+
 app.route('/')
   .get(function(req, res){
     res.render('layout')
   })
-  .post(function(req, res){
-    res.render('layout')
-  })
+  // .post(function(req, res){
+  //   res.redirect('/'+req.body['room'])
+  // })
 
 
-app.get('/:user', function(req, res){
-  res.render('layout', {title: 'Hey', message: 'hello there!', input: req.params.user})
+// This will get you to a different route from the post, but it will not open different sockets.  Right now it will just make sure no one can accidently go to an extended route.
+app.get('/:room', function(req, res){
+  res.render('layout')
 })
-
-
 
 
 
