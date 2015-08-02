@@ -17,6 +17,8 @@ app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+
 app.route('/')
   .get(function(req, res){
     res.render('layout')
@@ -43,11 +45,6 @@ io.sockets.on('connection', function(socket){
 		});
 	// }, 200);
 });
-
-
-
-
-
 
 
 
