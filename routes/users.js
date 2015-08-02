@@ -109,7 +109,7 @@ router.route('/:id')
 				res.format({
 					html: function(){
 						//again passing in locals here, well in a way.  essentially finding what I got from the db and passing it in so that I can view it in the jade template I render.
-						res.render('users', {
+						res.render('users/show', {
 							"user": user
 						})
 					}
