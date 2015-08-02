@@ -35,16 +35,15 @@ app.get('/:user', function(req, res){
 
 
 
-
-
 // io.on === io.sockets.on
 io.sockets.on('connection', function(socket){
-	socket.on('message', function(){
-		setInterval(function(){
-				socket.emit('time', {current_time: new Date()});
-		}, 1000);
-	})
-})
+	// setTimeout(function(){
+		socket.on('draw', function(data){
+			io.emit('draw', data)
+		});
+	// }, 200);
+});
+
 
 
 

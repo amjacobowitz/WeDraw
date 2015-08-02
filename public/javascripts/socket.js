@@ -1,24 +1,55 @@
-// might need 3000, might not.  Not clear.
-var socket = io.connect('http://localhost:3000');
-socket.emit('message')
-socket.on('time', function(data){
-	$('.time').text(data.current_time);
-})
 
 $(document).ready(function() {
+
 	var canvas = document.getElementById("drawingCanvas");
 	var context = canvas.getContext('2d');
-	
-	var canvasOffset = $('#drawingCanvas').offset();
-
-	//I am offsetting here so that my x and y coordinated are what I would expect.  They should be 0 for x in the top right and 0 for y there.  However, y is currently starting at 20.  Not sure why.  I have just put a +20 for now to take care of the discrepency
-	var offsetX = canvasOffset.left
-	var offsetY = canvasOffset.top
-	// this variable determines whether we will track where the mouse is moving or not.  When true, tracks. When false, does not.
 	var drawingOn = false
 	var lineColor = 'black'
 	var lineWidth = 3
 
+
+	var canvasOffset = $('#drawingCanvas').offset();
+	//I am offsetting here so that my x and y coordinated are what I would expect.  They should be 0 for x in the top right and 0 for y there.  However, y is currently starting at 20.  Not sure why.  I have just put a +20 for now to take care of the discrepency
+	var offsetX = canvasOffset.left
+	var offsetY = canvasOffset.top
+	// this variable determines whether we will track where the mouse is moving or not.  When true, tracks. When false, does not.
+
+	var canvasInit= function(){
+
+		canvas.addEventListener('mousedown', function(event){
+			if (canvas){
+				trackMouseDown(event);
+			}
+		})
+
+		canvas.addEventListener('mouseup', function(event){
+			if (canvas){
+				trackMouseUp(event);
+			}
+		})
+
+		canvas.addEventListener('mousemove', function(event){
+			if (canvas){
+				trackMouseMove(event);
+			}
+		})
+
+		$(".lineColor").on('click', function(){
+			lineColor = $(this).text();
+			lineWidth = 3;
+		})
+
+		$(".eraser").on('click', function(){
+			lineColor = $(this).attr('id');
+			lineWidth = 7;
+		})
+
+		$(".lineWidth").on('click', function(){
+			width = $(this).attr('id')
+			lineWidth = parseInt(width)
+		})
+
+	}
 
 	function trackMouseDown(event){
 		// should call start draw
@@ -30,7 +61,6 @@ $(document).ready(function() {
 
 
 		drawingOn = true;
-
 	}
 
 	function trackMouseUp(event){
@@ -47,7 +77,7 @@ $(document).ready(function() {
 
 	function trackMouseMove(event){
 		// draw onto the canvas
-		if (drawingOn === true){
+		if (drawingOn){
 			prevMouseX = curMouseX
 			prevMouseY = curMouseY
 			curMouseX = parseInt(event.clientX - offsetX);
@@ -55,49 +85,36 @@ $(document).ready(function() {
 			console.log('mouse moved to x: '+ curMouseX);
 			console.log('mouse moved to y: '+ curMouseY);
 
-			draw();
+			socket.emit('draw', {
+				curMouseX: curMouseX,
+				curMouseY: curMouseY,
+				prevMouseX: prevMouseX,
+				prevMouseY: prevMouseY,
+				lineWidth: lineWidth,
+				lineColor: lineColor,
+			})
+
 		}
 	}
 
-	function draw(){
+	function draw(data){
 		context.beginPath();
-		context.lineWidth = lineWidth; //make this a variable set by pressing a button latter on
-		context.strokeStyle = lineColor; //make this a variable too
-		context.moveTo(prevMouseX, prevMouseY);
-		context.lineTo(curMouseX, curMouseY);
+		context.lineWidth = data.lineWidth; 
+		context.strokeStyle = data.lineColor; 
+		context.moveTo(data.prevMouseX, data.prevMouseY);
+		context.lineTo(data.curMouseX, data.curMouseY);
 		context.stroke();
 		context.closePath()
 	}
 
+	canvasInit();
 
-	$('#drawingCanvas').on('mousedown', function(event){
-		trackMouseDown(event);
+	var socket = io.connect('http://localhost:3000')
+
+
+	socket.on('draw', function(data){
+		draw(data);
 	})
-
-	$('#drawingCanvas').on('mouseup', function(event){
-		trackMouseUp(event);
-	})
-
-	$('#drawingCanvas').on('mousemove', function(event){
-		trackMouseMove(event);
-	})
-
-	$(".lineColor").on('click', function(){
-		lineColor = $(this).text();
-		lineWidth = 3;
-	})
-
-	$(".eraser").on('click', function(){
-		lineColor = $(this).attr('id');
-		lineWidth = 7;
-	})
-
-	$(".lineWidth").on('click', function(){
-		width = $(this).attr('id')
-		lineWidth = parseInt(width)
-	})
-
-
-
 
 });
+
