@@ -49,6 +49,13 @@ $(document).ready(function() {
 			lineWidth = parseInt(width)
 		})
 
+		$(".clear").on('click', function(){
+			if (confirm("Are you sure you want to clear?") === true){
+				context.fillStyle = "white";
+				context.fillRect(0,0,500,300);
+			}
+		})
+
 	}
 
 	function trackMouseDown(event){
@@ -93,7 +100,6 @@ $(document).ready(function() {
 				lineWidth: lineWidth,
 				lineColor: lineColor,
 			})
-
 		}
 	}
 
