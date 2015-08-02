@@ -2,7 +2,7 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var port = 5000;
-var io = require('socket.io').listen(app.listen(port));
+var io = require('socket.io').listen(app.listen(process.env.PORT || port));
 
 
 
