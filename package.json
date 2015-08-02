@@ -1,17 +1,23 @@
 {
   "name": "we_draw_app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "We draw things together!",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "aaron-jacobowitz",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.2",
     "jade": "^1.11.0",
     "socket.io": "^1.3.6"
+  },
+  "engines": {
+    "node": "0.12.7"
+  },
+  "scripts": {
+    "start": "node app.js"
   }
 }
