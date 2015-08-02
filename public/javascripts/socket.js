@@ -2,17 +2,18 @@
 $(document).ready(function() {
 
 	var canvas = document.getElementById("drawingCanvas");
-	var context = canvas.getContext('2d');
+	if (canvas) {
+		var context = canvas.getContext('2d');
+		var canvasOffset = $('#drawingCanvas').offset();
+		//I am offsetting here so that my x and y coordinated are what I would expect.  They should be 0 for x in the top right and 0 for y there.  However, y is currently starting at 20.  Not sure why.  I have just put a +20 for now to take care of the discrepency
+		var offsetX = canvasOffset.left
+		var offsetY = canvasOffset.top
+		// this variable determines whether we will track where the mouse is moving or not.  When true, tracks. When false, does not.
+	}
 	var drawingOn = false
 	var lineColor = 'black'
 	var lineWidth = 3
 
-
-	var canvasOffset = $('#drawingCanvas').offset();
-	//I am offsetting here so that my x and y coordinated are what I would expect.  They should be 0 for x in the top right and 0 for y there.  However, y is currently starting at 20.  Not sure why.  I have just put a +20 for now to take care of the discrepency
-	var offsetX = canvasOffset.left
-	var offsetY = canvasOffset.top
-	// this variable determines whether we will track where the mouse is moving or not.  When true, tracks. When false, does not.
 
 	var canvasInit= function(){
 
@@ -112,10 +113,11 @@ $(document).ready(function() {
 		context.stroke();
 		context.closePath()
 	}
+	if (canvas) {
+		canvasInit();
+	}
 
-	canvasInit();
-
-	var socket = io.connect('http://localhost:3000/')
+	var socket = io.connect('http://localhost:5000/')
 
 
 	socket.on('draw', function(data){

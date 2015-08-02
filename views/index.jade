@@ -1,0 +1,30 @@
+extends layout
+
+block content
+			//- div(class="time")
+			//- form(action="/" method="post" )
+			//- 	input(type="text", name="room", class="room", placeholder="choose a room")
+			//- 	input(type="submit" value="enter room")
+			div(class="drawing-area")
+				span(class="color-picker")
+					button(class="lineColor" style="border:1px solid black;") red
+					button(class="lineColor" style="border:1px solid black;") green
+					button(class="lineColor" style="border:1px solid black;") yellow
+					button(class="lineColor" style="border:1px solid black;") orange
+					button(class="lineColor" style="border:1px solid black;") blue
+					button(class="lineColor" style="border:1px solid black;") purple
+					button(class="lineColor" style="border:1px solid black;") black
+				span(width="10px") -
+				span(class="width-picker")
+					button(class="lineWidth" id="5" style="border:1px solid black;") Thick
+					button(class="lineWidth" id="3" style="border:1px solid black;") Normal
+					button(class="lineWidth" id="1" style="border:1px solid black;") Thin
+				span(width="10px") -
+				span(class="eraser-box")
+					button(class="eraser" id="white" style="border:1px solid black;") eraser
+				br
+				canvas(id="drawingCanvas" width="500" height="300" style="border:1px solid black;")
+				br
+				button(class="clear" style="border:1px solid black;") clear
+
+			
