@@ -117,7 +117,7 @@ $(document).ready(function() {
 		canvasInit();
 	}
 
-	var socket = io.connect('http://localhost:5000/')
+	var socket = io.connect('https://we-draw.herokuapp.com/')
 
 
 	socket.on('draw', function(data){
