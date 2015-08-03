@@ -29,9 +29,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // io.on === io.sockets.on
 io.sockets.on('connection', function(socket){
 		socket.on('draw', function(data){
-			io.emit('draw', data)
+			io.emit('draw', data);
 		});
+		socket.on('messageSubmit', function(data){
+			io.sockets.emit('messageUpdate', data);
+		})
 });
+
+
+
 
 
 

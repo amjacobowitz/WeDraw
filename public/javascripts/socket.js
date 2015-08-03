@@ -117,12 +117,67 @@ $(document).ready(function() {
 		canvasInit();
 	}
 
-	var socket = io.connect('https://we-draw.herokuapp.com/')
+	// var socket = io.connect('https://we-draw.herokuapp.com/')
+	var socket = io.connect('http://localhost:5000')
 
 
 	socket.on('draw', function(data){
 		draw(data);
 	})
 
+
+	var messages = []
+	var username = document.getElementById('username')
+	var message = document.getElementById('message');
+	var messageLog = document.getElementById('message-log')
+
+
+	// function updateMessageObj(messageObj){
+	// 	messages = messageObj.messages
+	// 	username = messageObj.username
+	// 	message = messageObj.message
+	// }
+
+	// I need to write something that fires on loading the page so that I can "initialize" the chat object.
+
+	//remember to clear the current message! 
+	$('.chat-box').on('submit', function(event){
+		event.preventDefault();
+
+		if (username.value === '' || message.value === ''){
+			if (username.value == ''){
+				alert('Please enter a username!');
+			} else{
+				alert('Please enter a message')
+			}
+		} else {
+			socket.emit('messageSubmit', {message: message.value, username: username.value});
+			message.value = '';
+		}
+
+	})
+
+	socket.on('messageUpdate', function(data){
+		updateMessage(data);
+	})
+
+	function updateMessage(data){
+		messages.push(data);
+		messageHTML = ''
+		for (var i=0; i<messages.length; i++){
+			messageHTML += '<b>' + messages[i].username + '</b>' + ': ';
+			messageHTML += messages[i].message
+			messageHTML += '<br>'
+		}
+		messageLog.innerHTML = messageHTML;
+	}
+
 });
+
+
+
+
+
+
+
 

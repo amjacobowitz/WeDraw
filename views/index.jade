@@ -26,3 +26,11 @@ block content
 		canvas(id="drawingCanvas" width="500" height="300" style="border:1px solid black;")
 		br
 		button(class="clear" style="border:1px solid black;") clear
+	#message-log(style="width: 500px; height: 150px; overflow-y: scroll; border:1px solid black;")
+	form(class="chat-box")
+		span Username
+		input(id="username" type="text" width="500" height="50")
+		br
+		span Message
+		input(id="message" type="text" height="50" style="width:450px")
+		input(id="submit-button" type="submit" value="send")
