@@ -1,14 +1,15 @@
 var path = require('path');
 var express = require('express');
 var app = express();
-var port = 5000;
-var io = require('socket.io').listen(app.listen(process.env.PORT || port));
+var port = process.env.PORT || 5000;
+var io = require('socket.io').listen(app.listen(port));
 
 
 
 console.log("Listening on port " + port);
 
 
+app.set('port', (process.env.PORT || 5000));
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 
@@ -18,7 +19,7 @@ app.set('views', __dirname + '/views');
 var db = require('./models/db');
 var user = require('./models/users');
 
-//including these here like above, but through modules becuse my app is going to "use" them as routes for the user below.  Inside each one, there are all of the actual routes, but this is telling my app to look in these files for the right routes.
+//including these here like above, but through modules becuse my app is going to "use" them as routes for the user below.  Inside each one, there are all of the actual routes, but this is telling my app to look in these files for the right routes.  It is e
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -43,4 +44,4 @@ io.sockets.on('connection', function(socket){
 
 
 
-module.exports = app;
+// module.exports = app;
