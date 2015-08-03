@@ -9,24 +9,18 @@ var io = require('socket.io').listen(app.listen(port));
 console.log("Listening on port " + port);
 
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', port);
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 
 
 
 // These pull all the files together.
-var db = require('./models/db');
-var user = require('./models/users');
 
 //including these here like above, but through modules becuse my app is going to "use" them as routes for the user below.  Inside each one, there are all of the actual routes, but this is telling my app to look in these files for the right routes.  It is e
 var index = require('./routes/index');
-var users = require('./routes/users');
-
-
 
 app.use('/', index);
-app.use('/users', users);
 
 //this seems to work to add just the public folder to the path instead of all three of its subfolders.  this means that my app will use express to look in the three subfolders of public to find any files it needs.
 app.use(express.static(path.join(__dirname, 'public')));
