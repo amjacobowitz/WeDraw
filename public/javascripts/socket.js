@@ -131,16 +131,6 @@ $(document).ready(function() {
 	var message = document.getElementById('message');
 	var messageLog = document.getElementById('message-log')
 
-
-	// function updateMessageObj(messageObj){
-	// 	messages = messageObj.messages
-	// 	username = messageObj.username
-	// 	message = messageObj.message
-	// }
-
-	// I need to write something that fires on loading the page so that I can "initialize" the chat object.
-
-	//remember to clear the current message! 
 	$('.chat-box').on('submit', function(event){
 		event.preventDefault();
 
@@ -166,8 +156,8 @@ $(document).ready(function() {
 		messageHTML = ''
 		for (var i=0; i<messages.length; i++){
 			messageHTML += '<b>' + messages[i].username + '</b>' + ': ';
-			messageHTML += messages[i].message
-			messageHTML += '<br>'
+			messageHTML += messages[i].message;
+			messageHTML += '<br>';
 		}
 		messageLog.innerHTML = messageHTML;
 	}

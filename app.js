@@ -32,6 +32,7 @@ io.sockets.on('connection', function(socket){
 			io.emit('draw', data);
 		});
 		socket.on('messageSubmit', function(data){
+			console.log(data)
 			io.sockets.emit('messageUpdate', data);
 		})
 });
